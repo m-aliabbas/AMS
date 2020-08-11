@@ -63,7 +63,7 @@ def AdviceTitlesOne(request,args):
             paid=0
             if pay:
                 if pay.amount>=REQUIRED_AMMOUNT:
-                    amnt=(pay.amount)-REQUIRED_AMMOUNT
+                    amnt=float(pay.amount)-REQUIRED_AMMOUNT
                     paid=2
                     pay_=Payment.objects.filter(user=user_id).update(amount=amnt)
                     advs_=Advise.objects.filter(user=user_id,id=args).update(is_paid=True)

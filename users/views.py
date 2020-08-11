@@ -22,7 +22,7 @@ def checkout(request):
     return render(request,'users/checkout.html')
 @login_required
 def charge(request):
-    amount = AMOUNT
+    amount = 50
     user_id = request.user.id
     user_name= request.user.username
     if request.method == 'POST':
@@ -42,8 +42,12 @@ def charge(request):
             )
     
             return redirect(reverse('success',args=[amount]))
-        #except stripe.error.StripeError as e:
-        except Exception:
+        except stripe.error.StripeError as e:
+            
+            print('Message is: %s' % e.error.message)
+            error_msg = "Something went wrong"
+            return redirect(reverse('error',args=[error_msg]))
+        except Exception as e:
             #error_msg = e.error.message
             error_msg = "Something went wrong"
             return redirect(reverse('error',args=[error_msg]))
