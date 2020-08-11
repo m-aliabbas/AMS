@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{%block content %}
+<div class="jumbotron">
+    {% if message.data %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Question</th>
+              <th>Your Response</th>
+              <th>Advice</th>
+            </tr>
+          </thead>
+         {% with p_q_id=0 %}
+         <tbody>
+            {% for r in message.data %}
+    
+            {% if message.paid == 2 %}
+            <tr>
+
+      
+                   <td> {{ r.question.q_text }}</td>
+
+            
+                    <td>{{  r.user_response.answer_text }}</td>
+                    
+                    <td>{{  r.suggestion }}</td>
+            
+          </tr>
+               {% else %}
+               {% if forloop.counter < 4 %} 
+               <tr>
+                
+               
+                     <td> {{ r.question.q_text }}</td>
+
+              
+                      <td>{{  r.user_response.answer_text }}</td>
+                      
+                      <td>{{  r.suggestion }}</td>
+              
+              </tr>
+              <tr>
+                <td>
+                  {{  r.suggestion_gen }}
+                </td>
+              </tr>
+                {% elif forloop.counter == 4 %} 
+                <tr>
+                  {% if message.paid == 1 %}
+                  <td colspan="3">
+                  <a class="btn btn-primary btn-lg" href="{% url 'checkout' %}">
+                    Recharge Your Account
+                  </a>
+                  </td>
+                  {% else %}
+                  <td colspan="3">
+                    <a class="btn btn-primary btn-lg" href="{% url 'checkout' %}">
+                     Please Pay by Your Card to get Expert Advise
+                    </a>
+                    </td>
+                  {% endif  %}
+                </tr>
+                {% if message.admin %}
+                
+                <tr>
+                  <td colspan="3">
+                  
+                  <a class="btn btn-primary btn-lg" href="{% url 'mock_pay' %}">
+                    Mockup Pay
+                  </a>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+              {% endif%}
+             {% endfor %}}
+         
+            {% endwith %}
+        </tbody>
+    </table>
+    <div class="panel-group">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><h3>General Advise </h3></div>
+        
+      
+    
+    {% if message.paid == 2 %}
+    <div class="panel-body">
+      {% for r in message.data %}
+      {{  r.suggestion_gen }}
+      <br>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="panel-body">Please Pay to Use this Feature</div>
+    {% endif%}
+  </div>
+      
+    {% endif %}
+    <hr class="my-4">
+    <div class=""></div>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Thanks</a>
+    </p>
+  </div>
+  {% endblock %}

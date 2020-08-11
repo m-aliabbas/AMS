@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
- 
+    path('api/',include('QuestionSystem.urls')),
     path('admin/', admin.site.urls),
        path('nested_admin',include('nested_admin.urls')),
     path('login/',auth_views.LoginView.as_view(template_name="users/login.html"),name="login"),
@@ -29,6 +29,11 @@ urlpatterns = [
     path('',user_views.HomeView,name="home"),
     path('register/', user_views.register,name="register"),
     path('profile/', user_views.profile,name="profile"),
+     path('charge/',user_views.charge,name="charge"),
+    path('checkout/',user_views.checkout,name="checkout"),
+    path('success/<str:args>/',user_views.successMsg,name="success"),
+    path('carderror/<str:args>/',user_views.CardError,name="error"),
+    
 ]
 
 if settings.DEBUG:

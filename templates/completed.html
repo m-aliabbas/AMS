@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{%block content %}
+<div class="jumbotron">
+    <h1 class="display-4">{{message.title}}</h1>
+    <h2 class="lead">{{message.txt}}</h2>
+    {% if message.data %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Question</th>
+              <th>Your Response</th>
+              <th>Advice</th>
+            </tr>
+          </thead>
+         {% with p_q_id=0 %}
+         <tbody>
+            {% for r in message.data %}
+                <tr>
+                {% with q_id=r.question.id %}
+
+                    
+                    
+                       <td> {{ r.question.q_text }}</td>
+                  
+                
+                        <td>{{  r.user_response.answer_text }}</td>
+                        
+                        <td>{{  r.suggestion }}</td>
+                    
+                {% endwith %}
+            </tr>
+             {% endfor %}}
+         
+            {% endwith %}
+        </tbody>
+    </table>
+    {% endif %}
+    <hr class="my-4">
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Thanks</a>
+    </p>
+  </div>
+  {% endblock %}

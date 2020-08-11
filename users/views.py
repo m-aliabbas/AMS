@@ -1,12 +1,72 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-
+from django.urls import reverse
 from datetime import datetime
 from .models import Profile
+from .models import Payment
 from django.contrib.auth.models import User
 import pytz
+
+import stripe
+import json
+from django.conf import settings
+from django.http.response import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+stripe.api_key = 'sk_test_51HD7MTCkEBLtSdgkcC6374ZUHJ2YsD0WY2cTAcjUFAf0uWXmGT06H0hsKg1hytdz7JgRCED7oNjhGsAHpcfjWtUk00JZ0cbPRt'
+AMOUNT=50.00
+@login_required
+def checkout(request):
+    return render(request,'users/checkout.html')
+@login_required
+def charge(request):
+    amount = AMOUNT
+    user_id = request.user.id
+    user_name= request.user.username
+    if request.method == 'POST':
+        print('Data:',request.POST)
+        try:
+            customer = stripe.Customer.create(
+                #email = request.POST['email'],
+                name = user_name,
+                source = request.POST['stripeToken']
+            )
+            charge = stripe.Charge.create(
+                customer = customer,
+                amount = amount*100,
+                currency = 'usd',
+                description = 'User Subscription'
+
+            )
+    
+            return redirect(reverse('success',args=[amount]))
+        #except stripe.error.StripeError as e:
+        except Exception:
+            #error_msg = e.error.message
+            error_msg = "Something went wrong"
+            return redirect(reverse('error',args=[error_msg]))
+@login_required
+def successMsg(request,args):
+    user=get_object_or_404(User, username=request.user.username)
+    pay=Payment.objects.filter(user=request.user.id).first()
+    if pay:
+        amnt=pay.amount+int(args)
+        
+        pay_=Payment.objects.filter(user=request.user.id).update(amount=amnt)
+        print(pay_)
+    else:
+        payment = Payment(user=user,payment_status=True)
+        payment.save()
+    amount = args
+    return render(request,'users/success.html',{'amount':amount})
+@login_required
+def CardError(request,args):
+    error = args
+    return render(request,'users/carderror.html',{'error':'CardError','details':error})
+
+
 
 def delete_expired_user():
     users_to_check = Profile.objects.filter(user_type=False)

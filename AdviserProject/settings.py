@@ -32,8 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
-    
+    'rest_framework',
     'QuestionSystem',
+    'django_extensions',
     #'django_crontab',
     'crispy_forms',
     'nested_admin',
@@ -133,6 +134,11 @@ CRONJOBS = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+STRIPE_TEST_PUBLIC_KEY ='pk_test_51HD7MTCkEBLtSdgkc8EzQ2B3qH5ILYoX51h9CbZuiN19ISx6EaM77NSPhRLkh8BZHLewjJy1vSPJI33bJ639VY4d002GWM98kZ'
+STRIPE_TEST_SECRET_KEY = 'sk_test_51HD7MTCkEBLtSdgkcC6374ZUHJ2YsD0WY2cTAcjUFAf0uWXmGT06H0hsKg1hytdz7JgRCED7oNjhGsAHpcfjWtUk00JZ0cbPRt'
+STRIPE_LIVE_MODE = False  # Change to True in production
+DJSTRIPE_WEBHOOK_SECRET = "whsec_xxx"
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
