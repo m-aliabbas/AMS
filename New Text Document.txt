@@ -1,6 +1,0 @@
-for user_answer in user_answers:
-...     print(user_answer.question.q_title)
-...     q_id=user_answer.question.id
-...     for ans in user_answers:
-...         if q_id==ans.question.id:
-...             ans.user_response.answer_text
