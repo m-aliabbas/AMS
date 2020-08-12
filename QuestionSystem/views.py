@@ -117,7 +117,7 @@ def ShowQuestion(request):
             if quiz_completed:
                 data=UserAnswer.objects.filter(user=request.user.id,advise=advise.id)
                 Advise.objects.filter(pk=advise.id).update(is_completed=True)
-                message={'title':'Questions Completed','txt':'Quiz Completed. Please Vist Advise Center to Reterive your message'}
+                message={'title':'Questions Completed','txt':'Questionaries Completed. Please Vist Advise Center to Reterive your message'}
                 return render(request,'completed.html',{'message':message})
             print(user_ans.question.q_text,user_ans.user_response.answer_text)
             next_q=NextAnswer.objects.filter(question=user_ans.question.id,answer=user_ans.user_response.id).first()
