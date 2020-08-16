@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="jumbotron">
+    <center><h1>Some <span class="text-danger">Error</span> occured during processing of your card</h1></center>
+    <hr>
+    {{ details}}
+    <a href="{% url 'home' %}" class="btn btn-outline-dark">Click here to go to Home Page.</a>
+    </div>
+
+{% endblock content %}

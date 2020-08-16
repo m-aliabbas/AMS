@@ -1,0 +1,2 @@
+Log Entry triggeredThe user with id: 7 expired.
+The user with id: 8 expired at :2020-08-05 08:41:03.791720+00:00.
