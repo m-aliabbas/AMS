@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="jumbotron">
+    <center><h1>Your subscription fees of amount <span class="text-success">${{amount}}</span> has been accepted.</h1></center>
+    <hr>
+    <a href="{% url 'home' %}" class="btn btn-outline-dark">Click here to go to Home Page.</a>
+    </div>
+
+{% endblock content %}

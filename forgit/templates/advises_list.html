@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{%block content %}
+<div class="jumbotron">
+    {% if message.data %}
+         {% for tit in message.data%}
+         <a href="{{tit.id}}" class="btn btn-primary btn-lg btn-block">
+            
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {{ tit.title }}
+                    </div>
+                  </div>
+            
+         </a>
+         <hr>
+         <br>
+         {% endfor %}
+    {% endif %}
+    <hr class="my-4">
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href='{{get_advise}}' role="button">Get New Advise</a>
+    </p>
+  </div>
+  {% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{%block content %}
+<form method="POST" action="submit_response/">
+    {% csrf_token %}
+    <div class="text-center">
+    <div class="alert">
+    <label for="{{ question.q_title }}">
+       <b> 
+           {{ question.q_text}}
+        </b>
+    </label>
+</div> 
+    </div>
+    <div class="list-group">
+    {% for ans in answer%}
+  
+       {% if question.q_type == 0 %}
+          <div class="text-center jumbotron list-group-item ">
+       <div class="radio"><input type="radio" id="{{question.q_title}}" name="user_response" value="{{ans.id}} ">  {{ans.answer_text}}</div> 
+        </div>
+       <!-- {{ ans }} -->
+        {% endif %}
+        {% if question.q_type == 1 %}
+        <div class="text-center jumbotron list-group-item ">
+        <div class="checkbox"><input type="checkbox" id="{{question.q_title}}" name="user_response" value="{{ans.id}} ">  {{ans.answer_text}}</div> 
+        </div>
+        <!-- {{ ans }} -->
+        {% endif %}
+    {% endfor %}
+    </div>
+    <br>
+    <div class="text-center"><input type="submit" class="save btn btn-success" value="Submit and Next">  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{%block content %}
+{% if message.title %}
+<div class="alert alert-primary" role="alert">
+    {{ message.title }}
+  </div>
+{% endif %}
+<form method="POST" action="post_title/">
+    {% csrf_token %}
+    <div class="text-center">
+    <div class="alert">
+    <label for="advise_title">
+       <b> 
+          Please Give Advise a Title
+        </b>
+    </label>
+</div> 
+    </div>
+    <div class="form-group">
+        <input type="text" name="advise_title" id="advise_title" placeholder="Please Enter an Advise Title"  class="form-control"/>
+      </div>
+    <br>
+    <div class="text-center"><input type="submit" class="save btn btn-success" value="Start Taking Advise by Completing Survey "> </div>
+</form>
+{% endblock %}
