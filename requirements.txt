@@ -22,7 +22,7 @@ gunicorn==20.0.4
 html5lib==1.1
 idna==2.10
 mysqlclient==2.0.1
-Pillow==7.1.2
+Pillow==8.1.1
 pubnub==4.1.6
 pycodestyle==2.6.0
 pycparser==2.20
