@@ -17,7 +17,7 @@ django-extensions==3.0.4
 django-nested-admin==3.3.2
 django-print-sql==2018.3.6
 django-rest-framework==0.1.0
-djangorestframework==3.11.1
+djangorestframework==3.11.2
 gunicorn==20.0.4
 html5lib==1.1
 idna==2.10
