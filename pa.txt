@@ -27,7 +27,7 @@ pubnub==4.1.6
 pycodestyle==2.6.0
 pycparser==2.20
 pycryptodomex==3.9.8
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 Pyphen==0.9.5
 python-decouple==3.3
 python-monkey-business==1.0.0
